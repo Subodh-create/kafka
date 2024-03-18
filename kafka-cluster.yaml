@@ -27,16 +27,16 @@ spec:
         configuration:
           bootstrap:
             alternativeNames:
-               - kafka-bootstrap.uat.plf.chargerapps.charger.com
+               - kafka-bootstrap.example.com
           brokers:
           - broker: 0
-            advertisedHost: kafka-broker-01.uat.plf.chargerapps.charger.com
+            advertisedHost: kafka-broker-01.example.com
             advertisedPort: 9095
           - broker: 1
-            advertisedHost: kafka-broker-02.uat.plf.chargerapps.charger.com
+            advertisedHost: kafka-broker-02.example.com
             advertisedPort: 9096
           - broker: 2
-            advertisedHost: kafka-broker-03.uat.plf.chargerapps.charger.com
+            advertisedHost: kafka-broker-03.example.com
             advertisedPort: 9097
         authentication:
           type: scram-sha-512
