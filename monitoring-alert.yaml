@@ -1,4 +1,3 @@
-
  apiVersion: monitoring.coreos.com/v1alpha1
  kind: AlertmanagerConfig
  metadata:
@@ -16,14 +15,17 @@
      routes:
        - receiver: "slack-receiver"
          continue: true
+         matchers:
+           - name: namespace
+             value: media
    receivers:
      - name: "slack-receiver"
        slackConfigs:
          - sendResolved: true
            apiURL:
              name: slack-webhook-url
-             key: webhook
+             key: webhook-url
              optional: false
-           channel: cortex
+           channel: "#alerts"
            title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
            text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
