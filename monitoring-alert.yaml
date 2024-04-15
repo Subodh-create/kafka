@@ -24,8 +24,8 @@
          - sendResolved: true
            apiURL:
              name: slack-webhook-url
-             key: webhook-url
+             key: https://hooks.slack.com/services/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
              optional: false
-           channel: "#alerts"
+           channel: "#prometheus"
            title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
            text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
