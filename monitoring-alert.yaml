@@ -34,3 +34,4 @@ receivers:
             {{ end }}
           {{ end }}
 templates: []
+https://github.com/prometheus-community/helm-charts/issues/355
