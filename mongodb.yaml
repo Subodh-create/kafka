@@ -1,0 +1,41 @@
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: example-mongodb
+spec:
+  members: 2
+  type: ReplicaSet
+  version: "5.0.5"
+  replicaSetHorizons:
+  - external: "mongodb-0.example.com:27017"
+    internal: "mongo-replicaset-0.default.svc.cluster.local:27017"
+  - external: "mongodb-1.example.com:27018"
+    internal: "mongo-replicaset-0.default.svc.cluster.local:27017"
+  security:
+    authentication:
+      modes: ["SCRAM-SHA-1"]
+  users:
+    - name: admin
+      db: admin
+      passwordSecretRef: # a reference to the secret that will be used to generate the user's password
+        name: mongo-user-pass
+      roles:
+        - name: clusterAdmin
+          db: admin
+        - name: userAdminAnyDatabase
+          db: admin
+      scramCredentialsSecretName: my-scram
+      additionalConnectionStringConfig:
+        readPreference: secondary
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
+  additionalConnectionStringConfig:
+    readPreference: primary
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongo-user-pass
+type: Opaque
+stringData:
+  password: admin@1234
